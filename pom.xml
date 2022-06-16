@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>6eecb176-c096-4b1c-b75f-6fab452ea227</groupId>
@@ -9,14 +11,14 @@
 
 	<name>customer-papi-app-v1</name>
 
-	<description/>
+	<description />
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.4.0-20220420</app.runtime>
 		<mule.maven.plugin.version>3.5.4</mule.maven.plugin.version>
-		<tags/>
+		<tags />
 		<categories>[]</categories>
 	</properties>
 
@@ -45,7 +47,9 @@
 						<objectStoreV2>true</objectStoreV2>
 						<properties>
 							<api.id>17911774</api.id>
-							</properties>
+							<anypoint.platform.client_id>0047ddda09944639952d9757a36e1848</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>4F253Bd9A82b49B0bdA3e2bd3F2c94cD</anypoint.platform.client_secret>
+						</properties>
 					</cloudHubDeployment>
 				</configuration>
 			</plugin>
