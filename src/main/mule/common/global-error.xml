@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<error-handler name="implementation-global-errorError_Handler" doc:id="8b49ded7-96f3-4a11-aab6-858b5d21cb06">
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="20914bf8-b2ae-48db-8abb-15949524a180" type="HTTP:CONNECTIVITY, HTTP:INTERNAL_SERVER_ERROR, HTTP:UNAUTHORIZED, HTTP:NOT_FOUND">
+			<ee:transform doc:name="Transform Message for SFDC Invalid Input" doc:id="0b84c3bb-4a82-4183-af6c-1e30a4ed8f13">
+				<ee:message>
+				</ee:message>
+				<ee:variables>
+					<ee:set-variable variableName="title"><![CDATA[error.description]]></ee:set-variable>
+					<ee:set-variable variableName="code"><![CDATA[500]]></ee:set-variable>
+					<ee:set-variable variableName="type"><![CDATA[error.errorType.identifier]]></ee:set-variable>
+					<ee:set-variable variableName="details"><![CDATA[error.detailedDescription]]></ee:set-variable>
+					<ee:set-variable variableName="httpStatus"><![CDATA[404]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="Flow Reference To Error Payload" doc:id="970afd74-92dc-42cf-be6c-f7f4982c1530" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger Error" doc:id="63e440d8-2b92-4155-8c86-ee6a0d62e252" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="apikit-global-errorError_Handler" doc:id="7bb9d184-bc47-4569-8000-e223531139b5" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="b30a22a2-ad7d-4fee-ac23-ed53689bbe9c" type="APIKIT:BAD_REQUEST" >
+			<ee:transform doc:name="Transform Message" doc:id="f623300c-bdb1-4c92-beb6-a9bddc6a0f0f" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="title" ><![CDATA[p('error.bad_request.title')]]></ee:set-variable>
+					<ee:set-variable variableName="code" ><![CDATA[p('error.bad_request.code')]]></ee:set-variable>
+					<ee:set-variable variableName="type" ><![CDATA[p('error.bad_request.type')]]></ee:set-variable>
+					<ee:set-variable variableName="details" ><![CDATA[p('error.bad_request.details')]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="d2f4b6fc-63b7-4f8f-9c10-1a26d9726b31" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger" doc:id="02ddd7be-fa46-46b1-8ea6-ab8b1d96468d" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]"/>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e74e6ea4-f87e-49ab-a728-f7856cc28e91" type="APIKIT:NOT_IMPLEMENTED" >
+			<flow-ref doc:name="Flow Reference" doc:id="31c520c4-e65e-480d-ad89-368bba892e8d" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger" doc:id="372ba911-5b11-4cac-9e9e-5007d9bad2ba" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]" />
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="22b171bf-aa20-46ec-a3c5-99b9a830c2e6" type="APIKIT:NOT_FOUND" >
+			<ee:transform doc:name="Transform Message" doc:id="7ca75ee9-5281-436d-bf3b-8b648d37f437">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+				</ee:message>
+				<ee:variables>
+					<ee:set-variable variableName="title"><![CDATA[p('error.resource_not_found.title')]]></ee:set-variable>
+					<ee:set-variable variableName="code"><![CDATA[p('error.resource_not_found.code')]]></ee:set-variable>
+					<ee:set-variable variableName="type"><![CDATA[p('error.resource_not_found.type')]]></ee:set-variable>
+					<ee:set-variable variableName="details"><![CDATA[p('error.resource_not_found.details')]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="b83a2949-54bb-438a-8f6b-8952f57d4b6a" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger" doc:id="4aa5256a-32f2-47be-800b-7480f0789303" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]" />
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e33be6d0-1a29-4610-b162-5c6867b9dfa4" type="APIKIT:METHOD_NOT_ALLOWED" >
+			<flow-ref doc:name="Flow Reference" doc:id="52c79b3d-c468-4e9b-a0f2-d77d93b07ea9" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger" doc:id="0ee21896-e8b4-4791-9c3c-eed107673841" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]" />
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="bb19e005-a929-48e9-82a6-4a59a3a42701" type="APIKIT:NOT_ACCEPTABLE" >
+			<flow-ref doc:name="Flow Reference" doc:id="e7cc6d60-cf3e-400f-bdce-603b08d99c6a" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger" doc:id="78c95c5b-e5cf-446b-b03f-3b3f98e4e808" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]" />
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="a95491aa-e2a0-49c2-bd80-f180978ce431" type="APIKIT:UNSUPPORTED_MEDIA_TYPE" >
+			<flow-ref doc:name="Flow Reference" doc:id="cf760afc-6df0-4222-b0eb-0fac79324e75" name="error-response-subFlow" />
+			<logger level="INFO" doc:name="Logger" doc:id="b9ebb8c7-c74a-4b6a-bd3d-f772fab0f029" message="#[%dw 2.0&#10;output application/json indent = false&#10;---&#10;{&#10;    TimeStamp: now(), &#10;    transactionId: vars.headers.'X-lyt-transactionId',&#10;    AppName: app.name,&#10;    FLowName: flow.name,&#10;    Category: &quot;Customer&quot;,&#10;    OriginatingApplication: &quot;Process API&quot;,&#10;    CustomerId: &quot;NA&quot;,&#10;    txnState: &quot;ERROR&quot;&#10;}]" />
+		</on-error-propagate>
+	</error-handler>
+</mule>

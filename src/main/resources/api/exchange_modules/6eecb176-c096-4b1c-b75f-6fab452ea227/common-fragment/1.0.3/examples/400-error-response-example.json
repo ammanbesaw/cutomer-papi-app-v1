@@ -1,0 +1,11 @@
+{
+  "msg": "failed operation",
+  "code": 400,
+  "success": false,
+  "eventId": "7dfd7a86f8a7df6a8",
+  "error": {
+    "type": "BAD_REQUEST",
+    "title": "Invalid Request",
+    "details": "The input contains invalid data"
+  }
+}
