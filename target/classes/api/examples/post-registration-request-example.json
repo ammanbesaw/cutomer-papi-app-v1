@@ -1,0 +1,14 @@
+{
+  "registrationRequest": {
+    "contactType": "mobile",
+    "countryCode": "+91",
+    "mobile": "7134281649",
+    "password": "alkdjowi",
+    "acceptDataPolicy": true,
+    "recieveNews": false,
+    "acceptPIC": true,
+    "locale": "en",
+    "captchatoken": "akdfjqoefjadlkfjaldj",
+    "recieveClaimsettle": true
+  }
+}

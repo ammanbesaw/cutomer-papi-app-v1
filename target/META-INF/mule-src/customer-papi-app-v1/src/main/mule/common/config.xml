@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	
+	<http:listener-config
+		name="api-httpListenerConfig">
+		<http:listener-connection 
+			host="${http.listener.host}" port="${http.listener.port}" />
+	</http:listener-config>
+	<apikit:config name="api-config"
+		api="api/api.raml"
+		outboundHeadersMapName="outboundHeaders"
+		httpStatusVarName="httpStatus" />
+	<configuration-properties
+		doc:name="Configuration properties"
+		doc:id="389d0f20-c237-4948-a4e4-781bdfea5bb0"
+		file="properties/${env}.yaml" />
+	<configuration-properties
+		doc:name="Configuration properties"
+		doc:id="f11f78e0-7fe8-41f2-bf99-5b114ab2d844"
+		file="properties/constraints/error-details.yaml" />
+	<http:request-config name="HTTP_Request_configuration_Customer_SAPI" doc:name="HTTP Request configuration" doc:id="b0c8596c-54b8-4875-952d-1c86144a1c6b" >
+		<http:request-connection host="${http.requester.customer.sapi.host}" port="${http.requester.customer.sapi.port}" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration_Verification_SAPI" doc:name="HTTP Request configuration" doc:id="87444d36-4c65-4064-92ad-3fd7a7b846f7" >
+		<http:request-connection host="${http.requester.verification.sapi.host}" port="${http.requester.verification.sapi.port}" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration-Registration_SAPI" doc:name="HTTP Request configuration" doc:id="3c962473-5d01-4fbd-bdcf-9f9ee0e40ccc" >
+		<http:request-connection host="${http.requester.registration.sapi.host}" port="${http.requester.registration.sapi.port}" />
+	</http:request-config>
+	<global-property doc:name="Global Property" doc:id="42f34834-4f7e-4ff6-9713-7811ee9c74e9" name="env" value="local" />
+</mule>

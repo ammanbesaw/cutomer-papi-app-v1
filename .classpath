@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.mule.tooling.MULE_PROJECT_LIB"/>
+	<classpathentry kind="con" path="MULE_LIB/org.mule.connectors/mule-vm-connector/2.0.0"/>
+	<classpathentry kind="con" path="MULE_LIB/org.mule.modules/mule-apikit-module/1.6.0"/>
+	<classpathentry kind="con" path="org.mule.tooling.API_SPEC_LIB/6eecb176-c096-4b1c-b75f-6fab452ea227/customer-papi-raml/1.0.2"/>
+	<classpathentry exported="true" kind="con" path="MULE_LIB/org.mule.connectors/mule-http-connector/1.7.1"/>
+	<classpathentry exported="true" kind="con" path="org.mule.tooling.API_SPEC_LIB/34507794-becb-4ce0-8ea4-9eb3a2796f31/common-fragment/1.0.2"/>
+	<classpathentry exported="true" kind="con" path="MULE_LIB/org.mule.connectors/mule-sockets-connector/1.2.2"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="MULE_RUNTIME/org.mule.tooling.server.4.4.0.ee"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="src" path="src/main/mule"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry kind="src" path="src/test/munit"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

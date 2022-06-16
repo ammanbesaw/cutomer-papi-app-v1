@@ -1,0 +1,33 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  verificationRequest:
+    type: object
+    properties:
+      contactType:
+        type: string
+        required: true
+        enum:
+          - mobile
+          - email
+        example: email
+      countryCode:
+        type: string
+        required: false
+        enum:
+          - "+91"
+          - "+1"
+        example: "+91"
+      mobile:
+        type: string
+        required: false
+        example: "7134281649"
+      email:
+        type: string
+        required: false
+        example: "aman34@gmail.com"
+      messageContent:
+        type: string
+        required: true
+        example: "Use this number to verify"

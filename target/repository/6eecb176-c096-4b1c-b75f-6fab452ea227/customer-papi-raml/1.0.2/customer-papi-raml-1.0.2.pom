@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>6eecb176-c096-4b1c-b75f-6fab452ea227</groupId>
+  <artifactId>customer-papi-raml</artifactId>
+  <version>1.0.2</version>
+  <name>customer-papi-raml</name>
+  <properties>
+    <classifier>raml</classifier>
+    <main>api.raml</main>
+    <status>published</status>
+    <originalFormatVersion>1.0</originalFormatVersion>
+    <apiVersion>v1</apiVersion>
+    <projectId>fe4d4885-6b56-4ee2-99d2-6d955cfb91eb</projectId>
+    <branchId>master</branchId>
+    <commitId>a96d2f707b7e46eba2931bc69a23ff1b64e8fe34</commitId>
+    <keywords/>
+    <type>rest-api</type>
+    <mainFile>api.raml</mainFile>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>6eecb176-c096-4b1c-b75f-6fab452ea227</groupId>
+      <version>1.0.2</version>
+      <type>zip</type>
+      <classifier>raml-fragment</classifier>
+      <artifactId>common-fragment</artifactId>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <id>anypoint-exchange</id>
+      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+    </repository>
+  </repositories>
+</project>

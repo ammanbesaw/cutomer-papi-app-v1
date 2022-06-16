@@ -1,0 +1,16 @@
+#%RAML 1.0 ResourceType
+
+traits:
+  common-header: !include /traits/common-header-trait.raml
+  authorization-header: !include /traits/common-jwt-authorization-trait.raml
+
+types:
+  error-dataTypes: !include /dataTypes/error-dataType.raml
+  post-registration_request: !include /dataTypes/post-registration-request-dataType.raml
+  post_registration_response: !include /dataTypes/post-registration-response-dataType.raml
+
+examples:
+  400-error: !include /examples/400-error-response-example.json
+  401-error: !include /examples/401-error-response-example.json
+  404-error: !include /examples/404-error-response-example.json
+  500-error: !include /examples/500-error-response-example.json

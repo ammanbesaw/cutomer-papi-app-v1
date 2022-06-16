@@ -1,0 +1,146 @@
+#%RAML 1.0
+title: customer-module-registration-papi
+description: customer-papi-raml
+protocols:
+  - HTTPS
+  - HTTP
+
+traits:
+  common-headers: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/traits/common-header-trait.raml
+
+types:
+  error-dataType: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/error-dataType.raml
+  post-registration-request: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/post-registration-request-dataType.raml
+  post-registration-response: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/post-registration-response-dataType.raml
+  post-customerState-request: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/post-customerState-request-dataType.raml
+  post-customerState-response: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/post-customerState-response-dataType.raml
+  post-verification-request: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/post-verification-request-dataType.raml
+  post-verification-response: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/dataTypes/post-verification-response-dataType.raml
+
+/customers:
+  /registration:
+    post:
+      is:
+        - common-headers
+      queryParameters:
+        featureName:
+          required: true
+          type: string
+          enum:
+            - cwf
+            - cf
+      body:
+        application/json:
+          type: post-registration-request
+          example: !include /examples/post-registration-request-example.json
+      responses:
+        201:
+          description: Created
+          body:
+            application/json:
+              type: post-registration-response
+              example: !include /examples/post-registration-response-example.json
+        400:
+         description: Bad Request
+         body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/400-error-response-example.json
+        401:
+         description: Unauthorized
+         body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/401-error-response-example.json
+        404:
+         description: Not Found
+         body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/404-error-response-example.json      
+        500:
+          description: Internal Server Error
+          body:
+            application/json:
+              type: error-dataType
+              example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/500-error-response-example.json       
+            
+/customerState:
+  post:
+    is:
+      - common-headers
+    body:
+      application/json:
+        type: post-customerState-request
+        example: !include /examples/post-customerState-request-example.json
+    responses:
+      201:
+        description: Created
+        body:
+          application/json:
+            type: post-customerState-response
+            example: !include /examples/post-customerState-response-example.json
+      400:
+        description: Bad Request
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/400-error-response-example.json
+      401:
+        description: Unauthorized
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/401-error-response-example.json
+      404:
+        description: Not Found
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/404-error-response-example.json      
+      500:
+        description: Internal Server Error
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/500-error-response-example.json     
+
+/verification:
+  post:
+    is:
+      - common-headers
+    body:
+      application/json:
+        type: post-verification-request
+        example: !include /examples/post-verification-request-example.json
+    responses:
+      201:
+        description: Created
+        body:
+          application/json:
+            type: post-verification-response
+            example: !include /examples/post-verification-response-example.json
+      400:
+        description: Bad Request
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/400-error-response-example.json
+      401:
+        description: Unauthorized
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/401-error-response-example.json
+      404:
+        description: Not Found
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/404-error-response-example.json      
+      500:
+        description: Internal Server Error
+        body:
+          application/json:
+            type: error-dataType
+            example: !include /exchange_modules/6eecb176-c096-4b1c-b75f-6fab452ea227/common-fragment/1.0.6/examples/500-error-response-example.json
