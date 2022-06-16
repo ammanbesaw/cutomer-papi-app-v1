@@ -40,4 +40,6 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 		<http:request-connection host="${http.requester.registration.sapi.host}" port="${http.requester.registration.sapi.port}" />
 	</http:request-config>
 	<global-property doc:name="Global Property" doc:id="42f34834-4f7e-4ff6-9713-7811ee9c74e9" name="env" value="local" />
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="05d72bd9-d8e8-433b-8433-96575074d7cc" flowRef="api-main" />
+
 </mule>
